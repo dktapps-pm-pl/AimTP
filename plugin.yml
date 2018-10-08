@@ -1,7 +1,7 @@
 name: AimTP
 main: dktapps\AimTP\Main
 version: 0.0.1
-api: 3.2.4
+api: 4.0.0
 load: POSTWORLD
 author: dktapps
 description: Teleport where your crosshair is aiming

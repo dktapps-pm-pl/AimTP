@@ -6,7 +6,7 @@ namespace dktapps\AimTP;
 
 use pocketmine\event\block\BlockBreakEvent;
 use pocketmine\event\Listener;
-use pocketmine\event\player\PlayerInteractEvent;
+use pocketmine\event\player\PlayerItemUseEvent;
 use pocketmine\item\Item;
 use pocketmine\item\ItemFactory;
 use pocketmine\level\Level;
@@ -54,8 +54,8 @@ class Main extends PluginBase implements Listener{
 		}
 	}
 
-	public function onItemUse(PlayerInteractEvent $event){
-		if($event->getAction() === PlayerInteractEvent::RIGHT_CLICK_AIR and $event->getItem()->getNamedTagEntry(self::AIMSTICK_TAG) !== null){
+	public function onItemUse(PlayerItemUseEvent $event){
+		if($event->getItem()->getNamedTagEntry(self::AIMSTICK_TAG) !== null){
 			$player = $event->getPlayer();
 			$start = $player->add(0, $player->getEyeHeight(), 0);
 			$end = $start->add($player->getDirectionVector()->multiply(256));
