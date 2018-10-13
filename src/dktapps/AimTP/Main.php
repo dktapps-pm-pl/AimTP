@@ -68,7 +68,6 @@ class Main extends PluginBase implements Listener{
 
 				if(($result = $level->getBlockAt($vector3->x, $vector3->y, $vector3->z)->calculateIntercept($start, $end)) !== null){
 					$target = $result->hitVector;
-					Command::broadcastCommandMessage($player, "Teleported " . $player->getName() . " using teleporter stick to $target->x, $target->y, $target->z");
 					$player->teleport($target);
 					return;
 				}
