@@ -58,7 +58,7 @@ class Main extends PluginBase implements Listener{
 		if($event->getItem()->getNamedTagEntry(self::AIMSTICK_TAG) !== null){
 			$player = $event->getPlayer();
 			$start = $player->add(0, $player->getEyeHeight(), 0);
-			$end = $start->add($player->getDirectionVector()->multiply(256));
+			$end = $start->add($player->getDirectionVector()->multiply($player->getViewDistance() * 16));
 			$level = $player->level;
 
 			foreach(VoxelRayTrace::betweenPoints($start, $end) as $vector3){
