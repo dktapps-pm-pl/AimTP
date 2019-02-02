@@ -1,11 +1,11 @@
 name: AimTP
 main: dktapps\AimTP\Main
-version: 0.0.1
+version: 0.1.0
 api: 4.0.0
 load: POSTWORLD
 author: dktapps
 description: Teleport where your crosshair is aiming
-website: https://github.com/pmmp/PocketMine-DevTools
+website: https://github.com/dktapps-pm-pl/AimTP
 commands:
  tpstick:
   description: "Gives the player a teleporter stick"
