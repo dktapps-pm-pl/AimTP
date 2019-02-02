@@ -16,3 +16,6 @@ permissions:
  aimtp.give:
   default: op
   description: "Allows the player to use /tpstick"
+ aimtp.use:
+  default: op
+  description: "Allows the player to use a teleporter stick item"

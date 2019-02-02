@@ -57,6 +57,10 @@ class Main extends PluginBase implements Listener{
 	public function onItemUse(PlayerItemUseEvent $event){
 		if($event->getItem()->getNamedTagEntry(self::AIMSTICK_TAG) !== null){
 			$player = $event->getPlayer();
+			if(!$player->hasPermission('aimtp.use')){
+				$player->sendMessage(TextFormat::RED . 'You don\'t have permission to use this item');
+				return;
+			}
 			$start = $player->add(0, $player->getEyeHeight(), 0);
 			$end = $start->add($player->getDirectionVector()->multiply($player->getViewDistance() * 16));
 			$level = $player->level;
