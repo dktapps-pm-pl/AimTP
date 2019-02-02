@@ -66,6 +66,10 @@ class Main extends PluginBase implements Listener{
 					return;
 				}
 
+				if(!$level->isChunkLoaded($vector3->x >> 4, $vector3->z >> 4) or !$level->getChunk($vector3->x >> 4, $vector3->z >> 4)->isGenerated()){
+					return;
+				}
+
 				if(($result = $level->getBlockAt($vector3->x, $vector3->y, $vector3->z)->calculateIntercept($start, $end)) !== null){
 					$target = $result->hitVector;
 					$player->teleport($target);
