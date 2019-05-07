@@ -9,7 +9,7 @@ use pocketmine\event\Listener;
 use pocketmine\event\player\PlayerItemUseEvent;
 use pocketmine\item\Item;
 use pocketmine\item\ItemFactory;
-use pocketmine\level\Level;
+use pocketmine\world\World;
 use pocketmine\math\VoxelRayTrace;
 use pocketmine\nbt\tag\ByteTag;
 use pocketmine\Player;
@@ -38,7 +38,7 @@ class Main extends PluginBase implements Listener{
 				}
 				$stick = ItemFactory::get(Item::STICK);
 				$stick->setCustomName("Teleporter Stick");
-				$stick->setNamedTagEntry(new ByteTag(self::AIMSTICK_TAG, 1));
+				$stick->getNamedTag()->setByte(self::AIMSTICK_TAG, 1);
 				$player->getInventory()->addItem($stick);
 				Command::broadcastCommandMessage($sender, "Gave " . $sender->getName() . " a teleporter stick");
 				return true;
@@ -49,13 +49,13 @@ class Main extends PluginBase implements Listener{
 
 	public function onBreakBlock(BlockBreakEvent $event){
 		//prevent PE breaking blocks by accident
-		if($event->getItem()->getNamedTagEntry(self::AIMSTICK_TAG) !== null){
+		if($event->getItem()->getNamedTag()->hasTag(self::AIMSTICK_TAG)){
 			$event->setCancelled();
 		}
 	}
 
 	public function onItemUse(PlayerItemUseEvent $event){
-		if($event->getItem()->getNamedTagEntry(self::AIMSTICK_TAG) !== null){
+		if($event->getItem()->getNamedTag()->hasTag(self::AIMSTICK_TAG)){
 			$player = $event->getPlayer();
 			if(!$player->hasPermission('aimtp.use')){
 				$player->sendMessage(TextFormat::RED . 'You don\'t have permission to use this item');
@@ -63,18 +63,18 @@ class Main extends PluginBase implements Listener{
 			}
 			$start = $player->add(0, $player->getEyeHeight(), 0);
 			$end = $start->add($player->getDirectionVector()->multiply($player->getViewDistance() * 16));
-			$level = $player->level;
+			$world = $player->world;
 
 			foreach(VoxelRayTrace::betweenPoints($start, $end) as $vector3){
-				if($vector3->y >= Level::Y_MAX or $vector3->y <= 0){
+				if($vector3->y >= World::Y_MAX or $vector3->y <= 0){
 					return;
 				}
 
-				if(!$level->isChunkLoaded($vector3->x >> 4, $vector3->z >> 4) or !$level->getChunk($vector3->x >> 4, $vector3->z >> 4)->isGenerated()){
+				if(!$world->isChunkLoaded($vector3->x >> 4, $vector3->z >> 4) or !$world->getChunk($vector3->x >> 4, $vector3->z >> 4)->isGenerated()){
 					return;
 				}
 
-				if(($result = $level->getBlockAt($vector3->x, $vector3->y, $vector3->z)->calculateIntercept($start, $end)) !== null){
+				if(($result = $world->getBlockAt($vector3->x, $vector3->y, $vector3->z)->calculateIntercept($start, $end)) !== null){
 					$target = $result->hitVector;
 					$player->teleport($target);
 					return;
