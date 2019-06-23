@@ -12,7 +12,7 @@ use pocketmine\item\ItemFactory;
 use pocketmine\world\World;
 use pocketmine\math\VoxelRayTrace;
 use pocketmine\nbt\tag\ByteTag;
-use pocketmine\Player;
+use pocketmine\player\Player;
 use pocketmine\plugin\PluginBase;
 use pocketmine\command\CommandSender;
 use pocketmine\command\Command;
