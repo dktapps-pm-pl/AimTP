@@ -4,19 +4,17 @@ declare(strict_types=1);
 
 namespace dktapps\AimTP;
 
+use pocketmine\command\Command;
+use pocketmine\command\CommandSender;
 use pocketmine\event\block\BlockBreakEvent;
 use pocketmine\event\Listener;
 use pocketmine\event\player\PlayerItemUseEvent;
-use pocketmine\item\Item;
-use pocketmine\item\ItemFactory;
-use pocketmine\world\World;
+use pocketmine\item\VanillaItems;
 use pocketmine\math\VoxelRayTrace;
-use pocketmine\nbt\tag\ByteTag;
 use pocketmine\player\Player;
 use pocketmine\plugin\PluginBase;
-use pocketmine\command\CommandSender;
-use pocketmine\command\Command;
 use pocketmine\utils\TextFormat;
+use pocketmine\world\World;
 
 class Main extends PluginBase implements Listener{
 	private const AIMSTICK_TAG = 'tpstick';
@@ -36,7 +34,7 @@ class Main extends PluginBase implements Listener{
 				}else{
 					$player = $sender;
 				}
-				$stick = ItemFactory::get(Item::STICK);
+				$stick = VanillaItems::STICK();
 				$stick->setCustomName("Teleporter Stick");
 				$stick->getNamedTag()->setByte(self::AIMSTICK_TAG, 1);
 				$player->getInventory()->addItem($stick);
