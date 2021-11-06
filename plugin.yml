@@ -1,5 +1,6 @@
 name: AimTP
 main: dktapps\AimTP\Main
+src-namespace-prefix: dktapps\AimTP
 version: 0.1.0
 api: 4.0.0
 load: POSTWORLD
