@@ -46,14 +46,14 @@ class Main extends PluginBase implements Listener{
 		}
 	}
 
-	public function onBreakBlock(BlockBreakEvent $event){
+	public function onBreakBlock(BlockBreakEvent $event) : void{
 		//prevent PE breaking blocks by accident
 		if($event->getItem()->getNamedTag()->getTag(self::AIMSTICK_TAG) !== null){
 			$event->cancel();
 		}
 	}
 
-	public function onItemUse(PlayerItemUseEvent $event){
+	public function onItemUse(PlayerItemUseEvent $event) : void{
 		if($event->getItem()->getNamedTag()->getTag(self::AIMSTICK_TAG) !== null){
 			$player = $event->getPlayer();
 			if(!$player->hasPermission('aimtp.use')){
@@ -73,7 +73,7 @@ class Main extends PluginBase implements Listener{
 					return;
 				}
 
-				if(($result = $world->getBlockAt($vector3->x, $vector3->y, $vector3->z)->calculateIntercept($start, $end)) !== null){
+				if(($result = $world->getBlock($vector3)->calculateIntercept($start, $end)) !== null){
 					$target = $result->hitVector;
 					$player->teleport($target);
 					return;
