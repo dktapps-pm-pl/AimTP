@@ -7,16 +7,7 @@ load: POSTWORLD
 author: dktapps
 description: Teleport where your crosshair is aiming
 website: https://github.com/dktapps-pm-pl/AimTP
-commands:
- tpstick:
-  description: "Gives the player a teleporter stick"
-  usage: "/tpstick"
-  permission: aimtp.give
-
 permissions:
- aimtp.give:
-  default: op
-  description: "Allows the player to use /tpstick"
  aimtp.use:
   default: op
   description: "Allows the player to use a teleporter stick item"

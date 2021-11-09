@@ -4,14 +4,13 @@ declare(strict_types=1);
 
 namespace dktapps\AimTP;
 
-use pocketmine\command\Command;
-use pocketmine\command\CommandSender;
 use pocketmine\event\block\BlockBreakEvent;
 use pocketmine\event\Listener;
 use pocketmine\event\player\PlayerItemUseEvent;
+use pocketmine\item\Item;
+use pocketmine\item\StringToItemParser;
 use pocketmine\item\VanillaItems;
 use pocketmine\math\VoxelRayTrace;
-use pocketmine\player\Player;
 use pocketmine\plugin\PluginBase;
 use pocketmine\utils\TextFormat;
 use pocketmine\world\format\Chunk;
@@ -22,28 +21,13 @@ class Main extends PluginBase implements Listener{
 
 	public function onEnable() : void{
 		$this->getServer()->getPluginManager()->registerEvents($this, $this);
-	}
 
-	public function onCommand(CommandSender $sender, Command $command, string $label, array $args) : bool{
-		switch($command->getName()){
-			case 'tpstick':
-				if(!($sender instanceof Player)){
-					if(!isset($args[1]) or ($player = $sender->getServer()->getPlayerByPrefix($args[1])) === null){
-						$sender->sendMessage(TextFormat::RED . "You must specify a player from the console");
-						return true;
-					}
-				}else{
-					$player = $sender;
-				}
-				$stick = VanillaItems::STICK();
-				$stick->setCustomName("Teleporter Stick");
-				$stick->getNamedTag()->setByte(self::AIMSTICK_TAG, 1);
-				$player->getInventory()->addItem($stick);
-				Command::broadcastCommandMessage($sender, "Gave " . $sender->getName() . " a teleporter stick");
-				return true;
-			default:
-				return false;
-		}
+		StringToItemParser::getInstance()->register("tpstick", function() : Item{
+			$stick = VanillaItems::STICK();
+			$stick->setCustomName("Teleporter Stick");
+			$stick->getNamedTag()->setByte(self::AIMSTICK_TAG, 1);
+			return $stick;
+		});
 	}
 
 	public function onBreakBlock(BlockBreakEvent $event) : void{
