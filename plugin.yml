@@ -1,21 +1,13 @@
 name: AimTP
 main: dktapps\AimTP\Main
+src-namespace-prefix: dktapps\AimTP
 version: 0.1.0
-api: 3.5.0
+api: 4.0.0
 load: POSTWORLD
 author: dktapps
 description: Teleport where your crosshair is aiming
 website: https://github.com/dktapps-pm-pl/AimTP
-commands:
- tpstick:
-  description: "Gives the player a teleporter stick"
-  usage: "/tpstick"
-  permission: aimtp.give
-
 permissions:
- aimtp.give:
-  default: op
-  description: "Allows the player to use /tpstick"
  aimtp.use:
   default: op
   description: "Allows the player to use a teleporter stick item"
