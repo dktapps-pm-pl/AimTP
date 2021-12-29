@@ -6,13 +6,13 @@ Flying is too slow, teleporting using commands is tedious (and requires memorizi
 Presenting: the easiest way to hop around without needing to stop and think about it.
 
 ## Usage
-1. Get a teleport stick using `/tpstick`, and hold it in the main hand
+1. Get a teleport stick using `/give <player> tpstick`, and hold it in the main hand
 2. Look where you want to go
 3. Right click (or click & hold on mobile)
 4. Profit!
 
 ## Permissions
-- `aimtp.give`: Controls the ability to use `/tpstick`. Defaults to op only.
+- `aimtp.use`: Controls the ability to use teleporter stick items. Defaults to op only.
 
 ## Gotchas
 - You can't teleport into the sky or the void, only between 0-255 Y coordinates
